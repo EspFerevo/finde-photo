@@ -46,12 +46,13 @@ async function handleSubmit(event) {
 }
 
 async function handleLoadMoreClick() {
+  loadBtn.textContent = 'Loading...';
   page += 1;
   loader.style.display = 'block';
 
   try {
     const data = await searchImages(searchWord, page);
-    displayImages(data.hits);
+    await displayImages(data.hits);
     scrollPageSmoothly();
 
     const lastPage = Math.ceil(data.totalHits / 15);
@@ -71,8 +72,10 @@ async function handleLoadMoreClick() {
     iziToast.error({ title: 'Error', message: error.message });
   } finally {
     loader.style.display = 'none';
+    loadBtn.textContent = 'Load More';
   }
 }
+
 async function onBtnClick() {
   page += 1;
   try {
@@ -85,7 +88,7 @@ async function onBtnClick() {
 }
 
 function scrollPageSmoothly() {
-  const galleryElement = document.querySelector('.gallery');
+  const galleryElement = document.querySelector('#gallery');
   if (galleryElement && galleryElement.firstElementChild) {
     const { height: cardHeight } =
       galleryElement.firstElementChild.getBoundingClientRect();
