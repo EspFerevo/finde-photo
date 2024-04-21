@@ -39,6 +39,7 @@ async function handleSubmit(event) {
     scrollPageSmoothly();
   } catch (error) {
     iziToast.error({ title: 'Error', message: error.message });
+    loadBtn.style.display = 'none';
   } finally {
     loader.style.display = 'none';
     input.value = '';
