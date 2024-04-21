@@ -73,6 +73,17 @@ async function handleLoadMoreClick() {
     loader.style.display = 'none';
   }
 }
+async function onBtnClick() {
+  page += 1;
+  try {
+    const data = await apiPixabay(searchWord, page);
+    addPictures(data.hits);
+    scrollPageSmoothly();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
 function scrollPageSmoothly() {
   const galleryElement = document.querySelector('.gallery');
   if (galleryElement && galleryElement.firstElementChild) {
