@@ -1,7 +1,6 @@
 'use strict';
 
 import 'izitoast/dist/css/iziToast.min.css';
-
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
@@ -11,18 +10,22 @@ const lightbox = new SimpleLightbox('#gallery .image-card', {
   captionDelay: 250,
 });
 
-lightbox.refresh();
-
-export function displayImages(images) {
+async function displayImages(images) {
   const gallery = document.getElementById('gallery');
 
-  const imageCards = images.map(image => createImageCard(image));
+  const imageCards = await Promise.all(
+    images.map(async image => {
+      const card = await createImageCard(image);
+      return card;
+    })
+  );
+
   gallery.append(...imageCards);
 
   lightbox.refresh();
 }
 
-function createImageCard(image) {
+async function createImageCard(image) {
   const card = `
     <a class="image-card" href="${image.largeImageURL}">
       <img src="${image.webformatURL}" alt="${image.tags}">
@@ -40,3 +43,5 @@ function createImageCard(image) {
 
   return parseContainer.firstElementChild;
 }
+
+export { displayImages };

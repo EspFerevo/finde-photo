@@ -6,7 +6,7 @@ import { displayImages } from './js/render-functions.js';
 
 document
   .getElementById('search-form')
-  .addEventListener('submit', function (event) {
+  .addEventListener('submit', async function (event) {
     event.preventDefault();
     const query = document.getElementById('search-input').value.trim();
     if (query === '') {
@@ -17,33 +17,23 @@ document
       return;
     }
 
+    const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
-
     document.getElementById('search-input').value = '';
-
     const loader = document.getElementById('loader');
     loader.style.display = 'block';
 
-    searchImages(query)
-      .then(data => {
-        if (data.hits.length === 0) {
-          throw new Error(
-            'Sorry, there are no images matching your search query. Please try again!'
-          );
-        }
-        return data.hits;
-      })
-
-      .then(images => {
-        if (images.length === 0) {
-          return;
-        }
-        displayImages(images);
-      })
-      .catch(error => {
-        iziToast.error({ title: 'Error', message: error.message });
-      })
-      .finally(() => {
-        loader.style.display = 'none';
-      });
+    try {
+      const data = await searchImages(query);
+      if (data.hits.length === 0) {
+        throw new Error(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+      }
+      displayImages(data.hits);
+    } catch (error) {
+      iziToast.error({ title: 'Error', message: error.message });
+    } finally {
+      loader.style.display = 'none';
+    }
   });
