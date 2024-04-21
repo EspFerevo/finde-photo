@@ -61,9 +61,9 @@ async function handleLoadMoreClick() {
       loadBtn.style.display = 'none';
       iziToast.show({
         message: `We're sorry, but you've reached the end of search results.`,
-        messageColor: '#red',
+        messageColor: '#FDF5E6',
         position: 'bottomRight',
-        backgroundColor: '#cb73fc',
+        backgroundColor: '#FF4500',
         progressBar: false,
         close: false,
         timeout: 5000,
