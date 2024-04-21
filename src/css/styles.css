@@ -168,23 +168,18 @@ body {
 
 /* Load more button  */
 
-.hide {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
 .load-btn {
   display: block;
-  margin: 0 auto;
-  padding: 8px 16px;
-  width: 150px;
-  margin-top: 20px;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.load-btn:hover {
+  background-color: #45a049;
 }
