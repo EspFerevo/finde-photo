@@ -33,13 +33,14 @@ async function handleSubmit(event) {
         'Sorry, there are no images matching your search query. Please try again!'
       );
     }
-    displayImages(data.hits);
+
     displayImages(data.hits);
     if (data.total > 15) {
       loadBtn.style.display = 'block';
     } else {
       loadBtn.style.display = 'none';
     }
+
     scrollPageSmoothly();
   } catch (error) {
     iziToast.error({ title: 'Error', message: error.message });
