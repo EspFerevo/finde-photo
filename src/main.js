@@ -21,6 +21,7 @@ loadBtn.style.display = 'none';
 
 async function handleSubmit(event) {
   event.preventDefault();
+  page = 1;
   searchWord = input.value.trim();
   gallery.innerHTML = '';
   loader.style.display = 'block';
