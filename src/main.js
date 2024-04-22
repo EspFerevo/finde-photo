@@ -34,8 +34,11 @@ async function handleSubmit(event) {
       );
     }
     displayImages(data.hits);
+    displayImages(data.hits);
     if (data.total > 15) {
       loadBtn.style.display = 'block';
+    } else {
+      loadBtn.style.display = 'none';
     }
     scrollPageSmoothly();
   } catch (error) {
